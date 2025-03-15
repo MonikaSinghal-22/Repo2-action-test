@@ -44,7 +44,7 @@ jobs:
       #     customHeaders: '{"Content-Type": "application/json"}'
       #     body: '{"user": "${{ env.USER }}", "data": "${{ env.DATA }}"}'
       - name: Print Input JSON
-      run: cat input.json  # Print input.json before calling the API
+        run: cat input.json  # Print input.json before calling the API
 
       - name: Call API (Only if Validation Passes)
         run: |
