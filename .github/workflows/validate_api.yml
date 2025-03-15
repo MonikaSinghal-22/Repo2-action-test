@@ -3,6 +3,7 @@ name: Validate Input & Call API
 on:
   repository_dispatch:
     types: [validate-and-call-api]
+  workflow_dispatch:
 
 jobs:
   validate-and-call-api:
