@@ -1,8 +1,13 @@
 name: Validate Input & Call API
 
 on:
-  repository_dispatch:
-    types: [validate-and-call-api]
+  #repository_dispatch:
+  #  types: [validate-and-call-api]
+  workflow_run:
+    types:
+      - completed
+    branches:
+      - master
   workflow_dispatch:
 
 jobs:
@@ -11,6 +16,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Download Input Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: input-data
 
       - name: Set Up Python
         uses: actions/setup-python@v4
