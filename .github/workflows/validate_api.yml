@@ -27,19 +27,26 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Create Input JSON File
-        run: |
-          echo '${{ toJson(github.event.client_payload) }}' > input.json
+      # - name: Create Input JSON File
+      #   run: |
+      #     echo '${{ toJson(github.event.client_payload) }}' > input.json
 
       - name: Validate Input with Python
         id: validate
         run: python validate.py
 
-      - name: Call External API
-        if: success()
-        uses: fjogeleit/http-request-action@v1
-        with:
-          url: "https://example.com/api/endpoint"
-          method: "POST"
-          customHeaders: '{"Content-Type": "application/json"}'
-          body: '{"user": "${{ env.USER }}", "data": "${{ env.DATA }}"}'
+      # - name: Call External API
+      #   if: success()
+      #   uses: fjogeleit/http-request-action@v1
+      #   with:
+      #     url: "https://example.com/api/endpoint"
+      #     method: "POST"
+      #     customHeaders: '{"Content-Type": "application/json"}'
+      #     body: '{"user": "${{ env.USER }}", "data": "${{ env.DATA }}"}'
+      - name: Print Input JSON
+      run: cat input.json  # Print input.json before calling the API
+
+      - name: Call API (Only if Validation Passes)
+        run: |
+          echo "✅ Calling API..."
+          curl -X POST https://example.com/api --data @input.json
