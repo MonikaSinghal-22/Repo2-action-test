@@ -19,6 +19,12 @@ runs:
       run: echo '${{ inputs.input-data }}' > input.json
       shell: bash
 
+    - name: List files for debugging
+      run: |
+        echo "Listing files in the current directory:"
+        ls -R  # List all files recursively to see the directory structure
+      shell: bash
+
     - name: Validate Input
       run: python validate.py
       shell: bash
