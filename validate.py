@@ -19,3 +19,4 @@ if not input_data.isdigit():
     sys.exit(1)
 
 print("✅ Validation Passed: Input is valid.")
+sys.exit(0)
