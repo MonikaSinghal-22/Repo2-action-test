@@ -21,8 +21,8 @@ runs:
 
     - name: List files for debugging
       run: |
-        echo "Listing files in the current directory:"
-        ls -R  # List all files recursively to see the directory structure
+        echo "Listing all files and folders in the repository:"
+        ls -alR  # List all files and folders recursively in the current directory
       shell: bash
 
     - name: Validate Input
