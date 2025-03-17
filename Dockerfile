@@ -1,16 +1,14 @@
 # Use official Python image
 FROM python:3.9-slim
 
-# Set the working directory
-WORKDIR /app
+# Set the working directory inside the container
+WORKDIR /github/workspace
 
-# Copy necessary files
-COPY validate.py /app/validate.py
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
+# Copy necessary files into the container
+COPY validate.py .
 
-# Install dependencies (if needed)
-#RUN pip install requests
+# Install dependencies if needed
+RUN pip install requests  # Add any required dependencies
 
-# Set entrypoint
-ENTRYPOINT ["/app/entrypoint.sh"]
+# Set entrypoint to execute the validation script
+ENTRYPOINT ["python", "validate.py"]
