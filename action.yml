@@ -31,9 +31,11 @@ runs:
 
     - name: Data Lookup - version
       run: echo '${{ inputs.version }}'
+      shell: bash
 
     - name: Data Lookup - sbom
       run: echo '${{ inputs.input-data}}'
+      shell: bash
 
     - name: Write Input to File
       run: echo '${{ inputs.input-data }}' > input.json
