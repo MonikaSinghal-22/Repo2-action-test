@@ -9,6 +9,11 @@ def main():
     repository_name = sys.argv[0]
     version = sys.argv[1]
     input_data = sys.argv[2]
+    
+    print(repository_name)
+    print(version)
+    print(input_data)
+    print(type(input_data))
 
     try:
         # Convert input_data from string to JSON
