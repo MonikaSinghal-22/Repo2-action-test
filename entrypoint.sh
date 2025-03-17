@@ -6,4 +6,4 @@ echo "🚀 Running Validation in Docker Action..."
 echo "$INPUT_JSON" > input.json
 
 # Run validation script
-python validate.py
+python /app/validate.py
