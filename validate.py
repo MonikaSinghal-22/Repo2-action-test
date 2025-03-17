@@ -2,13 +2,13 @@ import sys
 import json
 
 def main():
-    if len(sys.argv) < 4:
+    if len(sys.argv) < 3:
         print("❌ Error: Missing required arguments.")
         sys.exit(1)
 
-    repository_name = sys.argv[1]
-    version = sys.argv[2]
-    input_data = sys.argv[3]
+    repository_name = sys.argv[0]
+    version = sys.argv[1]
+    input_data = sys.argv[2]
 
     try:
         # Convert input_data from string to JSON
