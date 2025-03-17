@@ -2,6 +2,12 @@ name: "Validate Input and Call API"
 description: "Validates input JSON and calls an API if valid"
 
 inputs:
+  repository_name:
+    description: 'Repository name'
+    required: true
+  version:
+    description: 'Version'
+    required: true
   input-data:
     description: "JSON input data"
     required: true
@@ -9,5 +15,7 @@ inputs:
 runs:
   using: "docker"
   image: "Dockerfile"
-  env:
-    INPUT_JSON: ${{ inputs.input-data }}
+  args:
+    - ${{ inputs.repository_name }}
+    - ${{ inputs.version }}
+    - ${{ inputs.input-data }}
