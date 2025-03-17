@@ -18,7 +18,7 @@ runs:
       uses: actions/checkout@v4
       with:
           repository: MonikaSinghal-22/Repo2-action-test  # Repo2's name
-          ref: v1.17  # The specific tag or branch you want to use in Repo2
+          ref: v1.18  # The specific tag or branch you want to use in Repo2
 
     - name: Set Up Python
       uses: actions/setup-python@v4
@@ -30,6 +30,7 @@ runs:
         echo "${{inputs.repository_name}}"
         echo "${{inputs.version}}"
         echo "${{inputs.input-data}}"
+      shell: bash
 
     - name: Check Repository Name
       id: check_repo
