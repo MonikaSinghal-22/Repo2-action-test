@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy necessary files into the container
-COPY validate.py ./app
+COPY validate.py ./app/validate.py
 
 # Install dependencies if needed
 RUN pip install requests  # Add any required dependencies
