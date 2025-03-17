@@ -1,75 +1,13 @@
 name: "Validate Input and Call API"
 description: "Validates input JSON and calls an API if valid"
+
 inputs:
-  repository_name:
-    description: 'Repository name'
-    required: true
-  version:
-    description: 'Version'
-    required: true
   input-data:
-    description: "The input data in JSON format"
+    description: "JSON input data"
     required: true
 
 runs:
-  using: "composite"
-  steps:
-    - name: Checkout Repository 2
-      uses: actions/checkout@v4
-      with:
-          repository: MonikaSinghal-22/Repo2-action-test  # Repo2's name
-          ref: v1.19  # The specific tag or branch you want to use in Repo2
-
-    - name: Set Up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
-
-    - name: Test
-      run: |
-        echo "${{inputs.repository_name}}"
-        echo "${{inputs.version}}"
-        echo "${{inputs.input-data}}"
-      shell: bash
-
-    - name: Check Repository Name
-      id: check_repo
-      run: |
-        if [ -z "${{ inputs.repository_name }}" ]; then
-          echo "repository_name is empty. Assigning to github.repository."
-          echo "repository_name=${{ github.repository }}" >> $GITHUB_ENV
-        else
-          echo "repository_name is provided: ${{ inputs.repository_name }}"
-          echo "repository_name=${{ inputs.repository_name }}" >> $GITHUB_ENV
-        fi
-      shell: bash
-
-    - name: Format JSON Data
-      run: |
-        jq --arg repository_name "${{ env.repository_name }}" --arg version "${{ inputs.version }}" --arg sbom "${{ inputs.input-data }}" \
-        '{
-          release: { repository_name: $repository_name, version: $version },
-          user: .user,
-          data: .data
-        }' <<< '${{ inputs.input-data }}' > formatted_data.json
-      shell: bash
-
-    - name: Print Formatted JSON
-      run: cat formatted_data.json
-      shell: bash
-
-    - name: List files for debugging
-      run: |
-        echo "Listing files in the current directory:"
-        ls -R  # List all files recursively to see the directory structure
-      shell: bash
-
-    - name: Validate Input
-      run: python validate.py
-      shell: bash
-
-    # - name: Call API (Only if Validation Passes)
-    #   run: |
-    #     echo "✅ Calling API..."
-    #     curl -X POST https://example.com/api --data @input.json
-    #   shell: bash
+  using: "docker"
+  image: "Dockerfile"
+  env:
+    INPUT_JSON: ${{ inputs.input-data }}
