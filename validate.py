@@ -2,9 +2,9 @@ import sys
 import json
 
 def main():
-    if len(sys.argv) < 3:
-        print("❌ Error: Missing required arguments.")
-        sys.exit(1)
+    # if len(sys.argv) < 3:
+    #     print("❌ Error: Missing required arguments.")
+    #     sys.exit(1)
 
     repository_name = sys.argv[0]
     version = sys.argv[1]
