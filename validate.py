@@ -2,7 +2,7 @@ import json
 import sys
 
 # Load input JSON
-with open("input.json", "r") as f:
+with open("formatted_data.json", "r") as f:
     data = json.load(f)
 
 # Extract values
