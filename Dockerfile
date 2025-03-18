@@ -5,8 +5,9 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy necessary files into the container
-COPY entrypoint.sh /app/entrypoint.sh
 COPY validate.py /app/validate.py
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
 # Install dependencies if needed
 RUN pip install requests  # Add any required dependencies
