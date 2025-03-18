@@ -4,7 +4,7 @@ description: "Validates input JSON and calls an API if valid"
 inputs:
   repository_name:
     description: 'Repository name'
-    required: true
+    required: false
   version:
     description: 'Version'
     required: true
@@ -16,6 +16,6 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ inputs.repository_name }}
+    - ${{ inputs.repository_name || github.repository}}
     - ${{ inputs.version }}
     - ${{ inputs.input-data }}
