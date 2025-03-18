@@ -5,6 +5,8 @@ REPO_NAME=$1
 VERSION=$2
 INPUT_DATA=$3
 
+echo "$REPO_NAME"
+
 # If repository_name is empty, use the GitHub repository value
 if [[ -z "$REPO_NAME" ]]; then
   REPO_NAME="${GITHUB_REPOSITORY}"
