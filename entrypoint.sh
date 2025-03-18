@@ -1,11 +1,10 @@
 #!/bin/bash
 set -e
 
+EMPTY_TEST=$1
 REPO_NAME=$1
 VERSION=$2
 INPUT_DATA=$3
-
-echo "$REPO_NAME"
 
 # If repository_name is empty, use the GitHub repository value
 if [[ -z "$REPO_NAME" ]]; then
@@ -17,4 +16,4 @@ echo "Version: $VERSION"
 echo "Input Data: $INPUT_DATA"
 
 # Run validation script
-python /app/validate.py "$REPO_NAME" "$VERSION" "$INPUT_DATA"
+python /app/validate.py "$REPO_NAME" "$VERSION" "$INPUT_DATA" "$EMPTY_TEST"
