@@ -16,6 +16,6 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ inputs.repository_name }}
-    - ${{ inputs.version }}
-    - ${{ inputs.input-data }}
+    - --repository_name=${{ inputs.repository_name }}
+    - --version=${{ inputs.version }}
+    - --input_data=${{ inputs.input-data }}
