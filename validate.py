@@ -13,6 +13,9 @@ def main(repository_name, version, input_data):
     # version = sys.argv[2]
     # input_data = sys.argv[3]
     
+    if not repository_name:
+        repository_name = os.getenv("GITHUB_REPOSITORY")
+    
     print(repository_name)
     print(version)
     print(input_data)
