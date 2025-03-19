@@ -1,5 +1,6 @@
 import sys
 import json
+import os
 
 def main():
     print(len(sys.argv))
@@ -8,7 +9,8 @@ def main():
         print("❌ Error: Missing required arguments.")
         sys.exit(1)
 
-    repository_name = sys.argv[1]
+    #repository_name = sys.argv[1]
+    repository_name = sys.argv[1] if sys.argv[1] else os.getenv("GITHUB_REPOSITORY", "unknown_repo")
     version = sys.argv[2]
     input_data = sys.argv[3]
     
