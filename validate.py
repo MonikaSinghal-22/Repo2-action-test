@@ -3,8 +3,6 @@ import json
 import os
 
 def main():
-    print(len(sys.argv))
-    print(sys.argv[4])
     if len(sys.argv) < 3:
         print("❌ Error: Missing required arguments.")
         sys.exit(1)
