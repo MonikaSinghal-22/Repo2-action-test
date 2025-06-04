@@ -3,7 +3,7 @@ import sys
 import json
 import os
 
-def main(repository_name, version, input_data):
+def main(repository_name, version, user, input_data):
     # if len(sys.argv) < 3:
     #     print("❌ Error: Missing required arguments.")
     #     sys.exit(1)
@@ -18,6 +18,7 @@ def main(repository_name, version, input_data):
     
     print(repository_name)
     print(version)
+    print(user)
     print(input_data)
     print(type(input_data))
 
@@ -32,7 +33,8 @@ def main(repository_name, version, input_data):
     formatted_data = {
         "release": {
             "repo_name": repository_name,
-            "version": version
+            "version": version,
+            "user": user
         },
         "user": input_json.get("user", ""),
         "data": input_json.get("data", "")
@@ -47,12 +49,13 @@ def main(repository_name, version, input_data):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Validate input JSON and call an API.")
 
-    parser.add_argument("--repository_name", type=str, default=os.getenv("GITHUB_REPOSITORY", "unknown_repo"),
+    parser.add_argument("--repository_name", type=str,
                         help="Repository name (defaults to GitHub repository if empty)")
     parser.add_argument("--version", type=str, required=True, help="Version of the release")
+    parser.add_argument("--user", type=str, required=True, help="user of the release")
     parser.add_argument("--input_data", type=str, required=True, help="JSON input data")
 
     args = parser.parse_args()
 
-    main(args.repository_name, args.version, args.input_data)
+    main(args.repository_name, args.version, args.user, args.input_data)
     
