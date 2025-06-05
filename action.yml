@@ -1,92 +1,17 @@
 name: "Validate Input and Call API"
 description: "Validates input JSON and calls an API if valid"
-inputs:
-  repository_name:
-    description: 'Repository name'
-    required: false
-  version:
-    description: 'Version'
-    required: true
-  user:
-    description: 'user'
-    required: true
-  input-data:
-    description: "JSON input data"
-    required: true
 
 runs:
   using: "composite"
   steps:
-    - name: Checkout Repository 2
+    - name: Checkout Repository
       uses: actions/checkout@v4
-      env:
-        BASE_URL: ${{ secrets.BASE_URL }}
-      # with:
-      #     repository: MonikaSinghal-22/Repo2-action-test  # Repo2's name
-      #     ref: v1.43  # The specific tag or branch you want to use in Repo2
 
-    - name: Set Up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
+    - name: Set BASE_URL environment variable
+      shell: bash
+      run: echo "BASE_URL=${{ secrets.BASE_URL }}" >> $GITHUB_ENV
 
-    # - name: Get base base_url
-    #   run: echo "BASE_URL=${{ secrets.BASE_URL }}" >> $GITHUB_ENV
-    #   shell: bash
-
-    # - name: Run script with external data
-    #   env:
-    #     BASE_URL: ${{ secrets.BASE_URL }}
-    #   run: |
-    #     echo "Base URL: $BASE_URL"
-    #   shell: bash
-
-    - name: Test
+    - name: Test input values
+      shell: bash
       run: |
-        echo "${{inputs.repository_name}}"
-        echo "${{inputs.version}}"
-        echo "${{inputs.input-data}}"
-        echo "${{env.BASE_URL}}"
-      shell: bash
-
-    # - name: Check Repository Name
-    #   id: check_repo
-    #   run: |
-    #     if [ -z "${{ inputs.repository_name }}" ]; then
-    #       echo "repository_name is empty. Assigning to github.repository."
-    #       echo "repository_name=${{ github.repository }}" >> $GITHUB_ENV
-    #     else
-    #       echo "repository_name is provided: ${{ inputs.repository_name }}"
-    #       echo "repository_name=${{ inputs.repository_name }}" >> $GITHUB_ENV
-    #     fi
-    #   shell: bash
-
-    # - name: Format JSON Data
-    #   run: |
-    #     jq --arg repository_name "${{ env.repository_name }}" --arg version "${{ inputs.version }}" --arg sbom "${{ inputs.input-data }}" \
-    #     '{
-    #       release: { repository_name: $repository_name, version: $version },
-    #       user: .user,
-    #       data: .data
-    #     }' <<< '${{ inputs.input-data }}' > formatted_data.json
-    #   shell: bash
-
-    # - name: Print Formatted JSON
-    #   run: cat formatted_data.json
-    #   shell: bash
-
-    - name: List files for debugging
-      run: |
-        echo "Listing files in the current directory:"
-        ls -R  # List all files recursively to see the directory structure
-      shell: bash
-
-    - name: Validate Input
-      run: python validate.py --repository_name=${{ inputs.repository_name }} --version=${{ inputs.version }} --user=${{ inputs.user }} --input_data=${{ inputs.input-data }} --base_url=${{ env.BASE_URL }}
-      shell: bash
-
-    # - name: Call API (Only if Validation Passes)
-    #   run: |
-    #     echo "✅ Calling API..."
-    #     curl -X POST https://example.com/api --data @input.json
-    #   shell: bash
+        echo "Base URL: $BASE_URL"
