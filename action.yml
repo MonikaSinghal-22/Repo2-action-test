@@ -4,14 +4,8 @@ description: "Validates input JSON and calls an API if valid"
 runs:
   using: "composite"
   steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-
-    - name: Set BASE_URL environment variable
-      shell: bash
-      run: echo "BASE_URL=${{ secrets.BASE_URL }}" >> $GITHUB_ENV
-
-    - name: Test input values
-      shell: bash
-      run: |
-        echo "Base URL: $BASE_URL"
+    - name: Hello world action
+      # with: # Set the secret as an input
+      #   super_secret: ${{ secrets.BASE_API_URL }}
+      env: # Or as an environment variable
+        super_secret: ${{ secrets.BASE_API_URL }}
