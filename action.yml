@@ -29,7 +29,7 @@ runs:
         python-version: '3.x'
 
     - name: Get base base_url
-      run: echo "$BASE_URL={{ secrets.BASE_URL || 'https://test.com'}}" >> $GITHUB_ENV
+      run: echo "BASE_URL=${{ secrets.BASE_URL }}" >> $GITHUB_ENV
       shell: bash
 
     - name: Test
