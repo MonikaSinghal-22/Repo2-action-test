@@ -28,8 +28,15 @@ runs:
       with:
         python-version: '3.x'
 
-    - name: Get base base_url
-      run: echo "BASE_URL=${{ secrets.BASE_URL }}" >> $GITHUB_ENV
+    # - name: Get base base_url
+    #   run: echo "BASE_URL=${{ secrets.BASE_URL }}" >> $GITHUB_ENV
+    #   shell: bash
+
+    - name: Run script with external data
+      env:
+        BASE_URL: ${{ secrets.BASE_URL }}
+      run: |
+        echo "Base URL: $BASE_URL"
       shell: bash
 
     - name: Test
