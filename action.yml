@@ -19,7 +19,7 @@ runs:
   using: "docker"
   image: "Dockerfile"
   env:
-    BASE_URL: ${{ vars.BASE_URL || "https:test.com" }}
+    BASE_URL: ${{ secrets.BASE_URL }}
   args:
     - --repository_name=${{ inputs.repository_name }}
     - --version=${{ inputs.version }}
