@@ -23,4 +23,4 @@ runs:
     - --version=${{ inputs.version }}
     - --user=${{ inputs.user }}
     - --input_data=${{ inputs.input-data }}
-    - --base_url=${{ secrets.BASE_URL || "https:test.com" }}
+    - --base_url=${{ vars.BASE_URL || "https:test.com" }}
