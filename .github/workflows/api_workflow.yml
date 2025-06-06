@@ -21,7 +21,7 @@ on:
                 type: string
 
 env:
-    BASE_API_URL: http://test.com
+    BASE_API_URL: ${{ secrets.BASE_URL || 'http://test.com' }}
 
 jobs:
     process:
