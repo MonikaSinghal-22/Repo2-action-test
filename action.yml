@@ -5,7 +5,5 @@ runs:
   using: "composite"
   steps:
     - name: Hello world action
-      # with: # Set the secret as an input
-      #   super_secret: ${{ secrets.BASE_API_URL }}
-      env: # Or as an environment variable
-        super_secret: ${{ secrets.BASE_API_URL }}
+      run: |
+        echo "$GITHUB_CONTEXT"
