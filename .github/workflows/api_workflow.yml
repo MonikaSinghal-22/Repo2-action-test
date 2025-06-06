@@ -24,23 +24,24 @@ env:
     BASE_API_URL: http://test.com
 
 jobs:
-  process:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Show inputs
-        run: |
-          echo "Repo: ${{ inputs.repository_name }}"
-          echo "User: ${{ inputs.user }}"
-          echo "Version: ${{ inputs.version }}"
-          echo "Input: ${{ inputs.input-data }}"
+    process:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Show inputs
+          run: |
+            echo "Repo: ${{ inputs.repository_name }}"
+            echo "User: ${{ inputs.user }}"
+            echo "Version: ${{ inputs.version }}"
+            echo "Input: ${{ inputs.input-data }}"
 
-# jobs:
-#     call-api-action:
-#         name: Use Repository 2 Action 
-#         uses: MonikaSinghal-22/Repo2-action-test@v1.43  # Replace 'author/repository2' with your GitHub repo path
-#         with:
-#             repository_name: ${{ github.repository}}
-#             user: ${{ github.actor }}
-#             version: ${{ inputs.version }}
-#             input-data: ${{ inputs.input-data }}
-#             base-api-url: ${{ env.BASE_API_URL }}
+    call-api-action:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Use Repository 2 Action 
+              uses: MonikaSinghal-22/Repo2-action-test@v1.43  # Replace 'author/repository2' with your GitHub repo path
+              with:
+                repository_name: ${{ inputs.repository_name || github.repository}}
+                user: ${{ inputs.user || github.actor }}
+                version: ${{ inputs.version }}
+                input-data: ${{ inputs.input-data }}
+                base_api_url: ${{ env.BASE_API_URL }}
