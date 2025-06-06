@@ -32,7 +32,7 @@ jobs:
           echo "Repo: ${{ inputs.repository_name }}"
           echo "User: ${{ inputs.user }}"
           echo "Version: ${{ inputs.version }}"
-          echo "Input: ${{ inputs.input-data }}"
+          echo "Input: ${{ inputs['input-data'] }}"
 
 # jobs:
 #     call-api-action:
