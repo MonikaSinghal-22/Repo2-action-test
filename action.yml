@@ -13,3 +13,7 @@ runs:
       run: |
         echo "$GITHUB_ENV"
       shell: bash
+
+    - name: Echo GitHub Environment
+      run: echo "ENVIRONMENT is ${{ github.environment }}"
+      shell: bash
