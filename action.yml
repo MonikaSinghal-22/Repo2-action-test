@@ -4,7 +4,10 @@ description: "Validates input JSON and calls an API if valid"
 runs:
   using: "composite"
   steps:
-    - name: Hello world action
+    - name: Checkout Repository 2
+      uses: actions/checkout@v4
+
+    - name: Print GITHUB_CONTEXT
       run: |
         echo "$GITHUB_CONTEXT"
       shell: bash
