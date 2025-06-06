@@ -59,5 +59,5 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    main(args.repository_name, args.version, args.user, args.input_data)
+    main(args.repository_name, args.version, args.user, args.input_data, args.base_url)
     
