@@ -1,0 +1,19 @@
+name: "Validate Input and Call API"
+description: "Validates input JSON and calls an API if valid"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Print GITHUB_CONTEXT
+      run: |
+        echo "$GITHUB_CONTEXT"
+      shell: bash
+
+    - name: Print GITHUB_ENV
+      run: |
+        echo "$GITHUB_ENV"
+      shell: bash
+
+    - name: Echo GitHub Environment
+      run: echo "ENVIRONMENT is ${{ github.environment }}"
+      shell: bash

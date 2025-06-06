@@ -1,0 +1,35 @@
+name: API Workflow
+
+on:
+    workflow_call:
+        inputs:
+            repository_name:
+                description: 'Repository name'
+                required: false
+                type: string
+            version:
+                description: 'Version'
+                required: true
+                type: string
+            user:
+                description: 'user'
+                required: true
+                type: string
+            input-data:
+                description: "JSON input data"
+                required: true
+                type: string
+
+env:
+    BASE_API_URL: http://test.com
+
+jobs:
+    call-api-action:
+        name: Use Repository 2 Action 
+        uses: MonikaSinghal-22/Repo2-action-test@v1.43  # Replace 'author/repository2' with your GitHub repo path
+        with:
+            repository_name: ${{ github.repository}}
+            user: ${{ github.actor }}
+            version: ${{ inputs.version }}
+            input-data: ${{ inputs.input-data }}
+            base-api-url: ${{ env.BASE_API_URL }}
