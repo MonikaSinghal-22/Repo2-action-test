@@ -7,3 +7,4 @@ runs:
     - name: Hello world action
       run: |
         echo "$GITHUB_CONTEXT"
+      shell: bash
