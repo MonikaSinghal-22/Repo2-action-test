@@ -5,7 +5,7 @@ inputs:
   repository_name:
       description: 'Repository name'
       required: false
-    version:
+  version:
       description: 'Version'
       required: true
   release_type:
