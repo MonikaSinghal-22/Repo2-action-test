@@ -7,13 +7,29 @@ on:
                 description: 'Repository name'
                 required: false
                 type: string
-            user:
-                description: 'user'
-                required: true
-                type: string
-            version:
+             version:
                 description: 'Version'
                 required: true
+                type: string
+            release_type:
+                description: 'Release Type'
+                required: false
+                type: string
+            checksum_data:
+                description: "Checksum"
+                required: false
+                type: string
+            user:
+                description: 'user'
+                required: false
+                type: string
+            team_name:
+                description: "team"
+                required: false
+                type: string
+            organization:
+                description: "org"
+                required: false
                 type: string
             input-data:
                 description: "JSON input data"
@@ -30,8 +46,12 @@ jobs:
         - name: Show inputs
           run: |
             echo "Repo: ${{ inputs.repository_name }}"
-            echo "User: ${{ inputs.user }}"
             echo "Version: ${{ inputs.version }}"
+            echo "Release type: ${{ inputs.release_type }}"
+            echo "Checksum_data: ${{ inputs.checksum_data}}"
+            echo "User: ${{ inputs.user }}"
+            echo "Team: ${{inputs.team_name}}"
+            echo "Org: ${{ inputs.organization}}"
             echo "Input: ${{ inputs.input-data }}"
 
     call-api-action:
@@ -41,7 +61,11 @@ jobs:
               uses: MonikaSinghal-22/Repo2-action-test@v1.43  # Replace 'author/repository2' with your GitHub repo path
               with:
                 repository_name: ${{ inputs.repository_name || github.repository}}
+                version: ${{ inputs.version || '0.0' }}
+                release_type: ${{ inputs.release_type || 'Manual'}}
+                checksum_data: ${{ inputs.checksum_data || '[]'}}
                 user: ${{ inputs.user || github.actor }}
-                version: ${{ inputs.version }}
+                team_name: ${{ inputs.team_name || 'Test'}}
+                organization: ${{ inputs.organization || 'Test'}}
                 input-data: ${{ inputs.input-data }}
                 base_api_url: ${{ env.BASE_API_URL }}

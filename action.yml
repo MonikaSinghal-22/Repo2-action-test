@@ -3,17 +3,29 @@ description: "Validates input JSON and calls an API if valid"
 
 inputs:
   repository_name:
-    description: 'Repository name'
-    required: false
+      description: 'Repository name'
+      required: false
+    version:
+      description: 'Version'
+      required: true
+  release_type:
+      description: 'Release Type'
+      required: true
+  checksum_data:
+      description: "Checksum"
+      required: true
   user:
-    description: 'user'
-    required: true
-  version:
-    description: 'Version'
-    required: true
+      description: 'user'
+      required: true
+  team_name:
+      description: "team"
+      required: true
+  organization:
+      description: "org"
+      required: true
   input-data:
-    description: "JSON input data"
-    required: true
+      description: "JSON input data"
+      required: true
   base_api_url:
     description: "url"
     required: true
