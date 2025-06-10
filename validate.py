@@ -3,7 +3,7 @@ import sys
 import json
 import os
 
-def main(repository_name, version, user,checksum_data, input_data, base_url):
+def main(repository_name, version, release_type, user,checksum_data, team_name, organization, input_data, base_url):
     # if len(sys.argv) < 3:
     #     print("❌ Error: Missing required arguments.")
     #     sys.exit(1)
@@ -18,7 +18,11 @@ def main(repository_name, version, user,checksum_data, input_data, base_url):
     
     print(repository_name)
     print(version)
+    print(release_type)
     print(user)
+    print(checksum_data)
+    print(team_name)
+    print(organization)
     print(base_url)
     print(input_data)
     print(type(input_data))
@@ -65,12 +69,15 @@ if __name__ == "__main__":
     parser.add_argument("--repository_name", type=str,
                         help="Repository name (defaults to GitHub repository if empty)")
     parser.add_argument("--version", type=str, required=True, help="Version of the release")
+    parser.add_argument("--release_type", type=str, required=True, help="Release type")
     parser.add_argument("--user", type=str, required=True, help="user of the release")
     parser.add_argument("--checksum_data", type=str, required=True, help="checksum")
+    parser.add_argument("--team_name", type=str, required=True, help="team")
+    parser.add_argument("--organization", type=str, required=True, help="org")
     parser.add_argument("--input_data", type=str, required=True, help="JSON input data")
     parser.add_argument("--base_url", type=str, required=False, help="API base url")
 
     args = parser.parse_args()
 
-    main(args.repository_name, args.version, args.user, args.input_data, args.base_url)
+    main(args.repository_name, args.version, args.release_type, args.user, args.checksum_data, args.team_name, args.organization, args.input_data, args.base_url)
     
