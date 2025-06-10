@@ -37,5 +37,6 @@ runs:
     - --repository_name=${{ inputs.repository_name }}
     - --version=${{ inputs.version }}
     - --user=${{ inputs.user }}
+    - --checksum_data=${{ inputs.checksum_data }}
     - --input_data=${{ inputs.input-data }}
     - --base_url=${{ inputs.base_api_url }}

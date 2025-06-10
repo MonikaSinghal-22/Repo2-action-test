@@ -3,7 +3,7 @@ import sys
 import json
 import os
 
-def main(repository_name, version, user, input_data, base_url):
+def main(repository_name, version, user,checksum_data, input_data, base_url):
     # if len(sys.argv) < 3:
     #     print("❌ Error: Missing required arguments.")
     #     sys.exit(1)
@@ -22,7 +22,19 @@ def main(repository_name, version, user, input_data, base_url):
     print(base_url)
     print(input_data)
     print(type(input_data))
-
+    
+    try:
+        checksum_data_json = json.loads(checksum_data)
+    except json.JSONEncoder:
+        print("❌ Error: Invalid JSON format in checksum.")
+        sys.exit(1)
+        
+    for checksum in checksum_data_json:
+        if not isinstance(checksum, dict):
+            print("❌ Error: Invalid JSON format in checksum dictionary.")
+            sys.exit(1)
+        for key, _ in checksum.items():
+            print(key)
     try:
         # Convert input_data from string to JSON
         input_json = json.loads(input_data)
@@ -54,6 +66,7 @@ if __name__ == "__main__":
                         help="Repository name (defaults to GitHub repository if empty)")
     parser.add_argument("--version", type=str, required=True, help="Version of the release")
     parser.add_argument("--user", type=str, required=True, help="user of the release")
+    parser.add_argument("--checksum_data", type=str, required=True, help="checksum")
     parser.add_argument("--input_data", type=str, required=True, help="JSON input data")
     parser.add_argument("--base_url", type=str, required=False, help="API base url")
 
