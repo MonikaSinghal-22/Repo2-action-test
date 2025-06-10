@@ -28,8 +28,7 @@ def main(repository_name, version, release_type, user,checksum_data, team_name, 
     print(type(input_data))
     
     try:
-        #checksum_data_json = json.loads(checksum_data)
-        checksum_data_json = [json.loads(idx.replace("'", '"')) for idx in checksum_data]
+        checksum_data_json = list(eval(checksum_data))
     except json.JSONEncoder:
         print("❌ Error: Invalid JSON format in checksum.")
         sys.exit(1)
