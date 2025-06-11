@@ -57,6 +57,9 @@ jobs:
         - name: list files
           run: ls -l
 
+        - name: list R
+          run: ls -R
+
         - name: list all files recursively
           run: find . -name validate.py
 
