@@ -54,6 +54,12 @@ jobs:
             update-ca-certificates
             pip install requests
 
+        - name: list files
+          run: ls -l
+
+        - name: list all files recursively
+          run: find . -name validate.py
+
         - name: run validate
           run: |
             python ./validate.py \
