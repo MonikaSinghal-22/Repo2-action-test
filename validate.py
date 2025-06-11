@@ -2,6 +2,7 @@ import argparse
 import sys
 import json
 import os
+import requests
 
 def main(repository_name, version, release_type, user,checksum_data, team_name, organization, input_data, base_url):
     # if len(sys.argv) < 3:
@@ -60,6 +61,9 @@ def main(repository_name, version, release_type, user,checksum_data, team_name, 
     # Save formatted JSON to file
     with open("formatted_data.json", "w") as json_file:
         json.dump(formatted_data, json_file, indent=4)
+        
+    response = requests.post("https://jsonplaceholder.typicode.com/todos/1")
+    print(response)
 
     print("✅ Successfully validated and saved formatted data.")
 

@@ -1,0 +1,68 @@
+name: Conatiner Workflow
+
+on:
+    workflow_call:
+        inputs:
+            repository_name:
+                description: 'Repository name'
+                required: false
+                type: string
+            version:
+                description: 'Version'
+                required: true
+                type: string
+            release_type:
+                description: 'Release Type'
+                required: false
+                type: string
+            checksum_data:
+                description: "Checksum"
+                required: false
+                type: string
+            user:
+                description: 'user'
+                required: false
+                type: string
+            team_name:
+                description: "team"
+                required: false
+                type: string
+            organization:
+                description: "org"
+                required: false
+                type: string
+            input-data:
+                description: "JSON input data"
+                required: true
+                type: string
+
+env:
+    BASE_API_URL: ${{ secrets.BASE_URL || 'http://test.com' }}
+
+jobs:
+    process:
+        runs-on: ubuntu-latest
+        container: 
+            image: python:3.11-alpine3.20
+        steps:
+        - name: Checkout repo
+          uses: actions/checkout@v4
+
+        - name: install dep
+          run: |
+            apk add --no-cache ca-certificates
+            update-ca-certificates
+            pip install requests
+
+        - name: run validate
+          run: |
+            python validate.py \
+                --repository_name "${{ inputs.repository_name }}" \
+                --version "${{ inputs.version }}" \
+                --release_type "${{ inputs.release_type }}" \
+                --user "${{ inputs.user }}" \
+                --checksum_data "${{ inputs.checksum_data }}" \
+                --team_name "${{ inputs.team_name}}" \
+                --organization "${{ inputs.organization}}" \
+                --input_data "${{ inputs.input-data }}" \
+                --base_url "${{ env.base_api_url }}"
