@@ -72,11 +72,11 @@ jobs:
           run: |
             python ./validate.py \
                 --repository_name "${{ inputs.repository_name || github.repository }}" \
-                --version "${{ inputs.version || '0.0.0' }}" \
-                --release_type "${{ inputs.release_type || 'Manual' }}" \
+                --version "${{ inputs.version || '' }}" \
+                --release_type "${{ inputs.release_type || '' }}" \
                 --user "${{ inputs.user || github.actor }}" \
                 --checksum_data "${{ inputs.checksum_data || '[]'}}" \
-                --team_name "${{ inputs.team_name || 'test'}}" \
-                --organization "${{ inputs.organization || 'test'}}" \
+                --team_name "${{ inputs.team_name || ''}}" \
+                --organization "${{ inputs.organization || ''}}" \
                 --input_data "${{ inputs.input-data }}" \
                 --base_url "${{ env.base_api_url }}"
