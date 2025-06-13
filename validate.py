@@ -28,13 +28,9 @@ def main(repository_name, version, release_type, user,checksum_data, team_name, 
     print(input_data)
     print(type(input_data))
     
-    try:
-        checksum_data_json = list(eval(checksum_data))
-    except json.JSONEncoder:
-        print("❌ Error: Invalid JSON format in checksum.")
-        sys.exit(1)
+   
         
-    for checksum in checksum_data_json:
+    for checksum in checksum_data:
         if not isinstance(checksum, dict):
             print("❌ Error: Invalid JSON format in checksum dictionary.")
             sys.exit(1)
