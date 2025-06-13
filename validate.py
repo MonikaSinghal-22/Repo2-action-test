@@ -29,8 +29,8 @@ def main(repository_name, version, release_type, user,checksum_data, team_name, 
     print(type(input_data))
     
    
-        
-    for checksum in checksum_data:
+    checksum_data_json = json.loads(checksum_data)
+    for checksum in checksum_data_json:
         if not isinstance(checksum, dict):
             print("❌ Error: Invalid JSON format in checksum dictionary.")
             sys.exit(1)
