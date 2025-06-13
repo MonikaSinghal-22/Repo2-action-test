@@ -35,7 +35,8 @@ def main(repository_name, version, release_type, user,checksum_data, team_name, 
             print("❌ Error: Invalid JSON format in checksum dictionary.")
             sys.exit(1)
         for key, _ in checksum.items():
-            print(key)
+            #print(key)
+            pass
     try:
         # Convert input_data from string to JSON
         input_json = json.loads(input_data)
