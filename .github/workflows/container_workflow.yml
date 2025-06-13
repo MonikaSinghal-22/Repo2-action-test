@@ -78,5 +78,5 @@ jobs:
                 --checksum_data '${{ inputs.checksum_data}}' \
                 --team_name "${{ inputs.team_name}}" \
                 --organization "${{ inputs.organization}}" \
-                --input_data '${{ inputs.input-data }}'' \
+                --input_data '${{ inputs.input-data }}' \
                 --base_url "${{ env.BASE_API_URL }}"
