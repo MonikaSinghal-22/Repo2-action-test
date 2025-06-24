@@ -65,13 +65,13 @@ jobs:
         - name: list all files recursively
           run: find . -name validate.py
 
-        - name: Repo name
-          run: echo "${{ github.repository }}"
+        # - name: Repo name
+        #   run: echo "${{ github.repository }}"
 
         - name: run validate
           run: |
             python ./validate.py \
-                --repository_name "${{ inputs.repository_name || github.repository }}" \
+                --repository_name "${{ inputs.repository_name }}" \
                 --version "${{ inputs.version }}" \
                 --release_type "${{ inputs.release_type  }}" \
                 --user "${{ inputs.user || github.actor }}" \
