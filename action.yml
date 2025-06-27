@@ -34,9 +34,6 @@ inputs:
         required: true
         type: string
 
-env:
-    BASE_API_URL: ${{ secrets.BASE_URL || 'http://test.com' }}
-
 runs:
     using: "composite"
     steps:
@@ -80,3 +77,6 @@ runs:
                 --organization "${{ inputs.organization}}" \
                 --input_data '${{ inputs.input-data }}' \
                 --base_url "${{ env.BASE_API_URL }}"
+
+env:
+    BASE_API_URL: ${{ secrets.BASE_URL || 'http://test.com' }}
