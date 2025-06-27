@@ -1,4 +1,5 @@
 import argparse
+import base64
 import sys
 import json
 import os
@@ -39,7 +40,7 @@ def main(repository_name, version, release_type, user,checksum_data, team_name, 
             pass
     try:
         # Convert input_data from string to JSON
-        input_json = json.loads(input_data)
+        input_json = json.loads(base64.b64decode(input_data).decode())
     except json.JSONDecodeError:
         print("❌ Error: Invalid JSON format in input-data.")
         sys.exit(1)
