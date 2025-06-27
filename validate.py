@@ -29,15 +29,15 @@ def main(repository_name, version, release_type, user,checksum_data, team_name, 
     print(input_data)
     print(type(input_data))
     
-    if checksum_data:
-        checksum_data_json = json.loads(checksum_data)
-        for checksum in checksum_data_json:
-            if not isinstance(checksum, dict):
-                print("❌ Error: Invalid JSON format in checksum dictionary.")
-                sys.exit(1)
-            for key, _ in checksum.items():
-                #print(key)
-                pass
+
+    checksum_data_json = json.loads(checksum_data or "[]")
+    for checksum in checksum_data_json:
+        if not isinstance(checksum, dict):
+            print("❌ Error: Invalid JSON format in checksum dictionary.")
+            sys.exit(1)
+        for key, _ in checksum.items():
+            #print(key)
+            pass
     try:
         # Convert input_data from string to JSON
         input_json = json.loads(base64.b64decode(input_data).decode())
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     parser.add_argument("--version", type=str, required=True, help="Version of the release")
     parser.add_argument("--release_type", type=str, required=True, help="Release type")
     parser.add_argument("--user", type=str, required=True, help="user of the release")
-    parser.add_argument("--checksum_data", type=str, required=True, help="checksum")
+    parser.add_argument("--checksum_data", type=str, required=False, help="checksum")
     parser.add_argument("--team_name", type=str, required=True, help="team")
     parser.add_argument("--organization", type=str, required=True, help="org")
     parser.add_argument("--input_data", type=str, required=True, help="JSON input data")
