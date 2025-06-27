@@ -1,45 +1,82 @@
-name: "Validate Input and Call API"
-description: "Validates input JSON and calls an API if valid"
+name: Conatiner Workflow
 
 inputs:
-  repository_name:
-      description: 'Repository name'
-      required: false
-  version:
-      description: 'Version'
-      required: true
-  release_type:
-      description: 'Release Type'
-      required: true
-  checksum_data:
-      description: "Checksum"
-      required: true
-  user:
-      description: 'user'
-      required: true
-  team_name:
-      description: "team"
-      required: true
-  organization:
-      description: "org"
-      required: true
-  input-data:
-      description: "JSON input data"
-      required: true
-  base_api_url:
-    description: "url"
-    required: true
+    repository_name:
+        description: 'Repository name'
+        required: false
+        type: string
+    version:
+        description: 'Version'
+        required: true
+        type: string
+    release_type:
+        description: 'Release Type'
+        required: false
+        type: string
+    checksum_data:
+        description: "Checksum"
+        required: false
+        type: string
+    user:
+        description: 'user'
+        required: false
+        type: string
+    team_name:
+        description: "team"
+        required: false
+        type: string
+    organization:
+        description: "org"
+        required: false
+        type: string
+    input-data:
+        description: "JSON input data"
+        required: true
+        type: string
+
+env:
+    BASE_API_URL: ${{ secrets.BASE_URL || 'http://test.com' }}
 
 runs:
-  using: "docker"
-  image: "Dockerfile"
-  args:
-    - --repository_name=${{ inputs.repository_name }}
-    - --version=${{ inputs.version }}
-    - --release_type=${{ inputs.release_type }}
-    - --user=${{ inputs.user }}
-    - --checksum_data=${{ inputs.checksum_data }}
-    - --team_name=${{ inputs.team_name}}
-    - --organization=${{ inputs.organization}}
-    - --input_data=${{ inputs.input-data }}
-    - --base_url=${{ inputs.base_api_url }}
+    using: "composite"
+    steps:
+        - name: Set Up Python
+          uses: actions/setup-python@v4
+          with:
+            python-version: '3.x'
+
+        - name: Checkout repo
+          uses: actions/checkout@v4
+          with:
+            repository: MonikaSinghal-22/Repo2-action-test
+
+        - name: install dep
+          run: |
+            apk add --no-cache ca-certificates
+            update-ca-certificates
+            pip install requests
+
+        - name: list files
+          run: ls -l
+
+        - name: list R
+          run: ls -R
+
+        - name: list all files recursively
+          run: find . -name validate.py
+
+        # - name: Repo name
+        #   run: echo "${{ github.repository }}"
+
+        - name: run validate
+          run: |
+            python ./validate.py \
+                --repository_name "${{ inputs.repository_name }}" \
+                --version "${{ inputs.version }}" \
+                --release_type "${{ inputs.release_type  }}" \
+                --user "${{ inputs.user || github.actor }}" \
+                --checksum_data '${{ inputs.checksum_data}}' \
+                --team_name "${{ inputs.team_name}}" \
+                --organization "${{ inputs.organization}}" \
+                --input_data '${{ inputs.input-data }}' \
+                --base_url "${{ env.BASE_API_URL }}"

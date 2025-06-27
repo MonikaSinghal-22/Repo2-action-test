@@ -1,0 +1,45 @@
+name: "Validate Input and Call API"
+description: "Validates input JSON and calls an API if valid"
+
+inputs:
+  repository_name:
+      description: 'Repository name'
+      required: false
+  version:
+      description: 'Version'
+      required: true
+  release_type:
+      description: 'Release Type'
+      required: true
+  checksum_data:
+      description: "Checksum"
+      required: true
+  user:
+      description: 'user'
+      required: true
+  team_name:
+      description: "team"
+      required: true
+  organization:
+      description: "org"
+      required: true
+  input-data:
+      description: "JSON input data"
+      required: true
+  base_api_url:
+    description: "url"
+    required: true
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - --repository_name=${{ inputs.repository_name }}
+    - --version=${{ inputs.version }}
+    - --release_type=${{ inputs.release_type }}
+    - --user=${{ inputs.user }}
+    - --checksum_data=${{ inputs.checksum_data }}
+    - --team_name=${{ inputs.team_name}}
+    - --organization=${{ inputs.organization}}
+    - --input_data=${{ inputs.input-data }}
+    - --base_url=${{ inputs.base_api_url }}
