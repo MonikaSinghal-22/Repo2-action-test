@@ -75,7 +75,7 @@ jobs:
                 --version "${{ inputs.version }}" \
                 --release_type "${{ inputs.release_type  }}" \
                 --user "${{ inputs.user || github.actor }}" \
-                --checksum_data '${{ inputs.checksum_data}}' \
+                --checksum_data "${{ inputs.checksum_data || '[]' }}" \
                 --team_name "${{ inputs.team_name}}" \
                 --organization "${{ inputs.organization}}" \
                 --input_data '${{ inputs.input-data }}' \
