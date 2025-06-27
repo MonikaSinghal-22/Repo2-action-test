@@ -17,6 +17,9 @@ def main(repository_name, version, release_type, user,checksum_data, team_name, 
     
     if not repository_name:
         repository_name = os.getenv("GITHUB_REPOSITORY")
+        
+    if not version:
+        print("error version is required")
     
     print(repository_name)
     print(version)
