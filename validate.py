@@ -29,15 +29,15 @@ def main(repository_name, version, release_type, user,checksum_data, team_name, 
     print(input_data)
     print(type(input_data))
     
-    if checksum_data:
-        checksum_data_json = json.loads(checksum_data)
-        for checksum in checksum_data_json:
-            if not isinstance(checksum, dict):
-                print("❌ Error: Invalid JSON format in checksum dictionary.")
-                sys.exit(1)
-            for key, _ in checksum.items():
-                #print(key)
-                pass
+   
+    checksum_data_json = json.loads(checksum_data or "[]")
+    for checksum in checksum_data_json:
+        if not isinstance(checksum, dict):
+            print("❌ Error: Invalid JSON format in checksum dictionary.")
+            sys.exit(1)
+        for key, _ in checksum.items():
+            #print(key)
+            pass
     try:
         # Convert input_data from string to JSON
         input_json = json.loads(base64.b64decode(input_data).decode())
