@@ -31,10 +31,10 @@ on:
                 description: "org"
                 required: false
                 type: string
-            input-data:
-                description: "JSON input data"
-                required: true
-                type: string
+            # input-data:
+            #     description: "JSON input data"
+            #     required: true
+            #     type: string
 
 env:
     BASE_API_URL: ${{ secrets.BASE_URL || 'http://test.com' }}
