@@ -21,14 +21,16 @@ def main(repository_name, version, release_type, user,checksum_data, team_name, 
     if not version:
         print("error version is required")
     
-    print(repository_name)
-    print(version)
-    print(release_type)
-    print(user)
+    print("Repository Name:",repository_name)
+    print("Version: ",version)
+    print("Relaese type: ",release_type)
+    print("User: ",user)
+    print("##CHECKSUM DATA##")
     print(checksum_data)
-    print(team_name)
-    print(organization)
-    print(base_url)
+    print("Team name: ",team_name)
+    print("Org: ",organization)
+    print("Base url: ",base_url)
+    print("###INPUT DATA###")
     print(input_data)
     print(type(input_data))
     
@@ -43,7 +45,8 @@ def main(repository_name, version, release_type, user,checksum_data, team_name, 
             pass
     try:
         # Convert input_data from string to JSON
-        input_json = json.loads(base64.b64decode(input_data).decode())
+        #input_json = json.loads(base64.b64decode(input_data).decode())
+        input_json = json.loads(input_data)
     except json.JSONDecodeError:
         print("❌ Error: Invalid JSON format in input-data.")
         sys.exit(1)
