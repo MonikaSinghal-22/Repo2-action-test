@@ -68,8 +68,15 @@ jobs:
         # - name: Repo name
         #   run: echo "${{ github.repository }}"
 
+        - name: Download Artifact from Triggering Workflow
+          uses: actions/download-artifact@v4
+          with:
+            name: input-json
+            path: .
+
         - name: run validate
           run: |
+            input_data=$(cat input.json)
             python ./validate.py \
                 --repository_name "${{ inputs.repository_name }}" \
                 --version "${{ inputs.version }}" \
@@ -78,5 +85,5 @@ jobs:
                 --checksum_data '${{ inputs.checksum_data }}' \
                 --team_name "${{ inputs.team_name}}" \
                 --organization "${{ inputs.organization}}" \
-                --input_data '${{ inputs.input-data }}' \
+                --input_data "${input_data}" \
                 --base_url "${{ env.BASE_API_URL }}"
