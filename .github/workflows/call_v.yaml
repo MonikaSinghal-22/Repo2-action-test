@@ -1,0 +1,13 @@
+name: V
+on:
+    workflow_call:
+
+jobs:
+    checkrepo:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v4
+
+            - name: Repo name
+              run: echo "${{github.repository}}"
