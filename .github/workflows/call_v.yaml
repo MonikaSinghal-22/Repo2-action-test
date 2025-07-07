@@ -9,5 +9,16 @@ jobs:
             - name: checkout
               uses: actions/checkout@v4
 
+            - name: checkout v repo
+              uses: actions/checlout@v4
+              with:
+                repository: MonikaSinghal-22/Repo2-action-test
+                ref: master
+                path: v-repo
+
             - name: Repo name
               run: echo "${{github.repository}}"
+
+            - name: see values
+              run: |
+                python3 v-repo/scripts/v_config_processor.py
