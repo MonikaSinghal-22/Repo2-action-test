@@ -10,7 +10,7 @@ jobs:
               uses: actions/checkout@v4
 
             - name: checkout v repo
-              uses: actions/checlout@v4
+              uses: actions/checkout@v4
               with:
                 repository: MonikaSinghal-22/Repo2-action-test
                 ref: master
