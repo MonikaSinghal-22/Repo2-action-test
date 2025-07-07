@@ -7,7 +7,7 @@ def load_yaml(file_path):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add('--config', default="config/v_config.yaml")
+    parser.add_argument('--config', default="config/v_config.yaml")
     args = parser.parse_args()
     
     v_config = load_yaml(args.config)
